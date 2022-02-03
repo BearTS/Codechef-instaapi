@@ -21,6 +21,10 @@ async function Post(url, caption) {
     console.log(`https://www.instagram.com/p/${media.code}/`);
 }
 
+async function getInfo(username){
+    const info = await client.getUserByUsername({ username: username });
+    return info;
+}
 // async function changeToJpg(url) {
 //     await Jimp.read(join(__dirname, '..', '..', 'image', 'image.png'), function (err, image) {
 //         if (err) {
@@ -33,5 +37,6 @@ async function Post(url, caption) {
 // }
 
 module.exports = {
-    Post
+    Post,
+    getInfo
 };

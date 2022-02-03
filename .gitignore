@@ -1,2 +1,4 @@
 node_modules
 src/temp
+.env
+package-lock.json

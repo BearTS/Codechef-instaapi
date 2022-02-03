@@ -6,7 +6,7 @@ const sharp = require('sharp');
 const { join } = require('path');
 
 const upload = multer({dest : join(__dirname, 'temp')}); 
-const { Post } = require('./functions/Instagram');
+const { Post, getInfo } = require('./functions/Instagram');
 const app = express();   
   
 app.use(bodyparser.urlencoded({extended : true}));  
@@ -18,11 +18,25 @@ app.post('/upload', upload.single('image'), async (req, res)=> {
     sharp(__dirname + './temp/image.jpg').resize(800,800)
         .jpeg({quality : 100}).toFile(__dirname + '/temp/image_cropped.jpg');
     
-    // await Post(join(__dirname, 'temp/image_cropped.jpg'), req.body.caption);
+    await Post(join(__dirname, 'temp/image_cropped.jpg'), req.body.caption);
     return res.json('File Uploaded Successfully!');
 });
 
-  
+app.get('/info', (req, res)=>{
+    getInfo(req.query.username).then(info => {
+        const { username, full_name, biography, id, is_verified } = info;
+        return res.json({
+            username,
+            full_name,
+            biography,
+            id,
+            is_verified,
+        });
+
+    }).catch(err => { console.log(err); });
+});
+
+
 app.listen(3000, ()=>{
     console.log('Server Running!');
 });
