@@ -1,4 +1,21 @@
 {
+  "name": "codechef-instaapi",
+  "version": "1.0.0",
+  "description": "Instagram Post Api",
+  "main": "./src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BearTS/Codechef-instaapi.git"
+  },
+  "author": "BearTS",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BearTS/Codechef-instaapi/issues"
+  },
+  "homepage": "https://github.com/BearTS/Codechef-instaapi#readme",
   "dependencies": {
     "body-parser": "^1.19.1",
     "dotenv": "^16.0.0",

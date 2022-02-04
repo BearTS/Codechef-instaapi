@@ -6,7 +6,7 @@ const sharp = require('sharp');
 const { join } = require('path');
 
 const upload = multer({dest : join(__dirname, 'temp')}); 
-const { Post, getInfo } = require('./functions/Instagram');
+const { Post, getInfo, deleteMedia, updateProfile } = require('./functions/Instagram');
 const app = express();   
   
 app.use(bodyparser.urlencoded({extended : true}));  
@@ -18,8 +18,12 @@ app.post('/upload', upload.single('image'), async (req, res)=> {
     sharp(__dirname + './temp/image.jpg').resize(800,800)
         .jpeg({quality : 100}).toFile(__dirname + '/temp/image_cropped.jpg');
     
-    await Post(join(__dirname, 'temp/image_cropped.jpg'), req.body.caption);
-    return res.json('File Uploaded Successfully!');
+    await Post(join(__dirname, 'temp/image_cropped.jpg'), req.body.caption).then(url => {
+        return res.json({
+            status : 'success',
+            url : url
+        });
+    });
 });
 
 app.get('/info', (req, res)=>{
@@ -33,7 +37,19 @@ app.get('/info', (req, res)=>{
             is_verified,
         });
 
-    }).catch(err => { console.log(err); });
+    }).catch(err => { res.json(err); });
+});
+
+app.get('/delete', (req, res)=>{
+    deleteMedia(req.query.mediaId).then(() => {
+        return res.json('Media Deleted Successfully!');
+    }).catch(err => { res.json(err); });
+});
+
+app.post('/update', (req, res)=>{
+    updateProfile(req.body.name, req.body.biography).then(() => {
+        return res.json('Profile Updated Successfully!');
+    }).catch(err => { res.json(err); });
 });
 
 

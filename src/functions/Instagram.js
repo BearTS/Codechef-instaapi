@@ -1,8 +1,4 @@
-const { join } = require('path');
-// const fs = require('fs');
 require('dotenv').config();
-// const axios = require('axios');
-// const Jimp = require('jimp');
 const Instagram = require('instagram-web-api');
 const client = new Instagram({
     username: process.env.INSTAGRAM_USERNAME,
@@ -13,30 +9,39 @@ const client = new Instagram({
     await client.login();
 })();
 
-async function Post(url, caption) {
-    // await changeToJpg(url);
-    const photo = join(__dirname, '..', 'temp', 'image_cropped.jpg');
-    // const photo = "https://i.ytimg.com/vi/w6-1O0WCdGM/maxresdefault.jpg"; for trying 
+async function Post(url, caption) { // upload/create
+    const photo = url;
     const { media } = await client.uploadPhoto({ photo: photo, caption: caption, post: 'feed' });
-    console.log(`https://www.instagram.com/p/${media.code}/`);
+    const uri = `https://www.instagram.com/p/${media.code}/`;
+    return uri;
 }
 
-async function getInfo(username){
+async function getInfo(username){ //retrieve 
     const info = await client.getUserByUsername({ username: username });
     return info;
 }
-// async function changeToJpg(url) {
-//     await Jimp.read(join(__dirname, '..', '..', 'image', 'image.png'), function (err, image) {
-//         if (err) {
-//             console.log(err);
-//             return;
-//         }
-//         image.write(join(__dirname, '..', '..', 'image', 'image.jpg'));
-//     });
-//     fs.unlinkSync(join(__dirname, '..', '..', 'image', 'image.png'));
-// }
+
+
+async function updateProfile(name, biography) { // update 
+    const user = getInfo(process.env.INSTAGRAM_USERNAME);
+    name = name || user.full_name;
+    biography = biography || user.biography;
+    await client.editProfile({ name: name, biography: biography });   
+    return;
+}
+
+
+async function deleteMedia(mediaId) { // delete
+    await client.deleteMedia({ mediaId: mediaId });
+    return;
+}
+
+
+
 
 module.exports = {
     Post,
-    getInfo
+    getInfo,
+    updateProfile,
+    deleteMedia
 };
