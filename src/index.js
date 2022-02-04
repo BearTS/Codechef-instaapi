@@ -57,6 +57,6 @@ app.get('*', (req, res) => {
     res.status(404).sendFile(join(__dirname, '../public/404.html'));
 });
 
-app.listen(3000, ()=>{
+app.listen(process.env.PORT || 3000, ()=>{
     console.log('Server Running!');
 });

@@ -6,6 +6,8 @@ ENV INSTAGRAM_USERNAME="${INSTAGRAM_USERNAME}"
 # The Password to Your Instagram Account
 # [Required]
 ENV INSTAGRAM_PASSWORD="${INSTAGRAM_PASSWORD}"
+# PORT to listen on
+ENV PORT = 3000
 
 RUN apk add  --no-cache git
 
