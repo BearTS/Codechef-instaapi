@@ -10,7 +10,8 @@ const { Post, getInfo, deleteMedia, updateProfile } = require('./functions/Insta
 const app = express();   
   
 app.use(bodyparser.urlencoded({extended : true}));  
-  
+app.use(express.static(join(__dirname, '../public/')));
+
 app.post('/upload', upload.single('image'), async (req, res)=> {
     fs.rename(join(req.file.path), join(__dirname + '/temp/image.jpg'), (err)=>{
         console.log(err);
@@ -52,6 +53,9 @@ app.post('/update', (req, res)=>{
     }).catch(err => { res.json(err); });
 });
 
+app.get('*', (req, res) => {
+    res.status(404).sendFile(join(__dirname, '../public/404.html'));
+});
 
 app.listen(3000, ()=>{
     console.log('Server Running!');

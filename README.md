@@ -18,5 +18,6 @@ Quick and Simple Instagram API made in NodeJS
 - [ ] Create a frontend website for documentation
 - [ ] Better Implementation (Returning Status code and handling errors)
 - [ ] Make Better Documentation
+- [x] Addition Of Docker
 - [x] Create Basic Functions
 
