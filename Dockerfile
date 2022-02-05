@@ -7,7 +7,7 @@ ENV INSTAGRAM_USERNAME="${INSTAGRAM_USERNAME}"
 # [Required]
 ENV INSTAGRAM_PASSWORD="${INSTAGRAM_PASSWORD}"
 # PORT to listen on
-ENV PORT = 3000
+ENV PORT=3000
 
 RUN apk add  --no-cache git
 
@@ -17,5 +17,5 @@ WORKDIR /usr/src/app
 COPY package.json /usr/src/app
 RUN npm install
 COPY . /usr/src/app
-EXPOSE 3000
+EXPOSE ${PORT}
 CMD ["node", "."]
