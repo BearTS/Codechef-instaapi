@@ -7,12 +7,12 @@ Quick and Simple Instagram API made in NodeJS
 
 ## Functions 
 
-| URL     | Description                                                                 | Method | Params                                    |
+| URL     | Description                                                                 | Method | Body/Query                                      |
 |---------|-----------------------------------------------------------------------------|--------|-------------------------------------------|
-| /upload | Upload a picture to instagram with captions [Returns the link to the media] | POST   | image= [file(image)] caption= [text]      |
-| /info   | Get info on the user [Returns username,full_name,biography,id,is_verified]  | GET    | username=[username of the user]           |
-| /delete | Delete an image using its mediaId                                           | GET    | mediaID=[id of the media]                 |
-| /update | Update your profile name and biography                                      | POST   | name=[New Name] Biography=[new Biography] |
+| /upload | Upload a picture to instagram with captions [Returns the link to the media] | POST - Body   | image= [file(image)] caption= [text]      |
+| /info   | Get info on the user [Returns username,full_name,biography,id,is_verified]  | GET - Query  | username=[username of the user]           |
+| /delete | Delete an image using its mediaId                                           | DELETE - Query | mediaID=[id of the media]                 |
+| /update | Update your profile name and biography                                      | PUT - Body    | name=[New Name] Biography=[new Biography] |
 
 ## To DO
 - [ ] Create a frontend website for documentation

@@ -41,13 +41,13 @@ app.get('/info', (req, res)=>{
     }).catch(err => { res.json(err); });
 });
 
-app.get('/delete', (req, res)=>{
+app.delete('/delete', (req, res)=>{
     deleteMedia(req.query.mediaId).then(() => {
         return res.json('Media Deleted Successfully!');
     }).catch(err => { res.json(err); });
 });
 
-app.post('/update', (req, res)=>{
+app.put('/update', (req, res)=>{
     updateProfile(req.body.name, req.body.biography).then(() => {
         return res.json('Profile Updated Successfully!');
     }).catch(err => { res.json(err); });
